@@ -1,5 +1,7 @@
 #include "feralfriend.h"
 
+int FeralFriend::entropy = 0;
+
 //Default constructor
 FeralFriend::FeralFriend() {
     name = "Unknown";
@@ -29,6 +31,13 @@ FeralFriend::FeralFriend(std::string n,double w, double pl, bool s) {
     std::cout << name << " was summoned with power level of: " << pl << "." << std::endl;
 }
 
+//Recruit function
+FeralFriend FeralFriend::addFriend(const std::string& n,
+    const double& w,const double& pl, const bool& s) {
+    std::cout << name << " recruits a new friend!\n";
+    return FeralFriend(n,w,pl,s);
+}
+
 std::string FeralFriend::getName() const {
     return name;
 }
@@ -43,6 +52,10 @@ double FeralFriend::getPowerLevel() const {
 
 bool FeralFriend::getStatus() const {
     return status;
+}
+
+int FeralFriend::getEntropy() const {
+    return entropy;
 }
 
 void FeralFriend::setName(std::string n) {
@@ -63,6 +76,19 @@ void FeralFriend::setStatus(bool s) {
 
 void FeralFriend::meow() {
     std::cout << "meow!! >^o^<" << std::endl;
+    //each time a friend meow, 
+    //increase collective entropy by 10
+    entropy += 10; 
+}
+
+void FeralFriend::nap() {
+    std::cout << name << " takes a nap zzZZzzZ >-.-<" << std::endl;
+    entropy -= 15; 
+}
+
+void FeralFriend::hiss() {
+    std::cout << name << " hisses KKkkkgghh >v.v<" << std::endl;
+    entropy += 20; 
 }
 
 void FeralFriend::printFriend() const {
